@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Repo {
+struct Repo: Decodable {
 //    let name: String
 //    let owner: Owner
     let url: String

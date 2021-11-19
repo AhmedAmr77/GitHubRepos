@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct RepoDetails {
+struct RepoDetails: Decodable {
     let name: String
-    let owner: Owner
+    var owner: Owner
     let created_at: String
 }

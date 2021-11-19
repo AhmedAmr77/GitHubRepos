@@ -11,20 +11,33 @@ import Foundation
 class ReposPresenter: ReposPresenterProtocol {
     
     weak var delegate: ReposViewProtocol?
-    var networkManager: ReposManagerProtocol?
+    var networkManager: ReposNetworkManagerProtocol?
+    
+    var reposDetailsArray = [RepoDetails]()
     
     init(delegate: ReposViewProtocol) {
         self.delegate = delegate
-//        networkManager =
+        networkManager = ReposNetworkManager()
     }
     
     func getRepos() {
         delegate?.showLoading()
-//        networkManager?.getRepos(reposPresenterProtocol: self)
-        
-        // /*
-        onSuccess(repos: [RepoDetails(name: "shopme", owner: Owner(login: "amr", avatar_url: "aa", avatar_data: Data()), created_at: "12-5-2021"), RepoDetails(name: "sportify", owner: Owner(login: "ahmd", avatar_url: "aa", avatar_data: Data()), created_at: "16-16-2021")])
-        // */
+        networkManager?.getReposData(url: "https://api.github.com/repositories", completion: { (repos, err) in
+            if let err = err {
+                self.onFail(errorMessage: err.localizedDescription)
+            } else {
+                if let repos = repos {
+                    for repo in repos {
+                        self.networkManager?.getReposDetailsData(url: repo.url, completion: { (repoDetails, err) in
+                            if let repoDetails = repoDetails {
+                                self.reposDetailsArray.append(repoDetails)
+                            }
+                        })
+                    }
+                    self.onSuccess(repos: self.reposDetailsArray)
+                }
+            }
+        })
     }
     
     func onSuccess(repos: [RepoDetails]) {

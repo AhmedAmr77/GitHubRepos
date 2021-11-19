@@ -20,7 +20,8 @@ protocol ReposPresenterProtocol {
     func onItemClick(row: Int)
 }
 
-protocol ReposManagerProtocol {
-    func getRepos(reposPresenterProtocol: ReposPresenterProtocol)
+protocol ReposNetworkManagerProtocol {
+    func getReposData(url: String, completion: @escaping ([Repo]?, Error?) -> Void)
+    func getReposDetailsData(url: String, completion: @escaping (RepoDetails?, Error?) -> Void) 
 }
 

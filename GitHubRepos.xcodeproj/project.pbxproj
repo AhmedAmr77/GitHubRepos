@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D1785552747D5F1007379F2 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1785542747D5F1007379F2 /* QueryService.swift */; };
+		0D2E0DC62747CC97002392EE /* ReposNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2E0DC52747CC97002392EE /* ReposNetworkManager.swift */; };
 		0D956CD82746EA7F00BC54B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D956CD72746EA7F00BC54B9 /* AppDelegate.swift */; };
 		0D956CDA2746EA7F00BC54B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D956CD92746EA7F00BC54B9 /* SceneDelegate.swift */; };
 		0D956CDC2746EA7F00BC54B9 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D956CDB2746EA7F00BC54B9 /* ReposViewController.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D1785542747D5F1007379F2 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
+		0D2E0DC52747CC97002392EE /* ReposNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposNetworkManager.swift; sourceTree = "<group>"; };
 		0D956CD42746EA7F00BC54B9 /* GitHubRepos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubRepos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D956CD72746EA7F00BC54B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D956CD92746EA7F00BC54B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +59,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D1785532747D5BA007379F2 /* BaseService */ = {
+			isa = PBXGroup;
+			children = (
+				0D1785542747D5F1007379F2 /* QueryService.swift */,
+			);
+			path = BaseService;
+			sourceTree = "<group>";
+		};
+		0D2E0DC22747C6EE002392EE /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				0DBC3DED274761E5008E5F2A /* Repo.swift */,
+				0DBC3DEF274761F2008E5F2A /* Owner.swift */,
+				0DBC3DF1274761FD008E5F2A /* RepoDetails.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		0D2E0DC32747C85D002392EE /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				0D2E0DC52747CC97002392EE /* ReposNetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		0D2E0DC42747CBF3002392EE /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0D956CF22747039400BC54B9 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		0D956CCB2746EA7F00BC54B9 = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +112,6 @@
 		0D956CD62746EA7F00BC54B9 /* GitHubRepos */ = {
 			isa = PBXGroup;
 			children = (
-				0DBC3DF327476203008E5F2A /* Contract */,
 				0D956CD72746EA7F00BC54B9 /* AppDelegate.swift */,
 				0D956CD92746EA7F00BC54B9 /* SceneDelegate.swift */,
 				0D956CE02746EA8200BC54B9 /* Assets.xcassets */,
@@ -101,9 +138,8 @@
 		0D956CEC2746EC8B00BC54B9 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				0DBC3DED274761E5008E5F2A /* Repo.swift */,
-				0DBC3DEF274761F2008E5F2A /* Owner.swift */,
-				0DBC3DF1274761FD008E5F2A /* RepoDetails.swift */,
+				0D2E0DC32747C85D002392EE /* NetworkManager */,
+				0D2E0DC22747C6EE002392EE /* DTOs */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -128,7 +164,9 @@
 		0D956CF12747038200BC54B9 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				0D956CF22747039400BC54B9 /* Constants.swift */,
+				0D1785532747D5BA007379F2 /* BaseService */,
+				0D2E0DC42747CBF3002392EE /* Constants */,
+				0DBC3DF427476237008E5F2A /* BaseContract */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -140,14 +178,6 @@
 				0D956CF5274706AA00BC54B9 /* ReposTableViewCell.xib */,
 			);
 			path = reposCell;
-			sourceTree = "<group>";
-		};
-		0DBC3DF327476203008E5F2A /* Contract */ = {
-			isa = PBXGroup;
-			children = (
-				0DBC3DF427476237008E5F2A /* BaseContract */,
-			);
-			path = Contract;
 			sourceTree = "<group>";
 		};
 		0DBC3DF427476237008E5F2A /* BaseContract */ = {
@@ -238,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D1785552747D5F1007379F2 /* QueryService.swift in Sources */,
 				0DBC3DF2274761FD008E5F2A /* RepoDetails.swift in Sources */,
 				0D956CDC2746EA7F00BC54B9 /* ReposViewController.swift in Sources */,
 				0D98226D27476CA700864B10 /* ReposPresenter.swift in Sources */,
@@ -247,6 +278,7 @@
 				0D956CDA2746EA7F00BC54B9 /* SceneDelegate.swift in Sources */,
 				0DBC3DEE274761E5008E5F2A /* Repo.swift in Sources */,
 				0DBC3DF627476248008E5F2A /* BaseContarct.swift in Sources */,
+				0D2E0DC62747CC97002392EE /* ReposNetworkManager.swift in Sources */,
 				0D956CF32747039400BC54B9 /* Constants.swift in Sources */,
 				0D956CF6274706AA00BC54B9 /* ReposTableViewCell.swift in Sources */,
 			);

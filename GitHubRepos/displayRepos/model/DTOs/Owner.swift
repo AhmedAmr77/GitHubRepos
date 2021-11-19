@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Owner {
+struct Owner: Decodable {
     let login: String //ownerName
     let avatar_url: String
-    
-    let avatar_data: Data
+//    let avatar_data: Data
+//    var avatar_Image: UIImage
 }

@@ -68,7 +68,7 @@ extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
         cell.repoNameLabel.text = repo.name
         cell.ownerNameLabel.text = repo.owner.login
         cell.creationDateLabel.text = repo.created_at
-        cell.avatarImageView.image = UIImage(data: repo.owner.avatar_data)
+//        cell.avatarImageView.image = repo.owner.avatar_Image
         
         return cell
     }
