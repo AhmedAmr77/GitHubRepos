@@ -15,13 +15,14 @@ class ReposViewController: UIViewController {
     
     var searchController: UISearchController!
     
-    var reposArray = [RepoDetails(name: "shopme", owner: Owner(login: "amr", avatar_url: "aa", avatar_data: Data()), created_at: "12-5-2021"), RepoDetails(name: "sportify", owner: Owner(login: "ahmd", avatar_url: "aa", avatar_data: Data()), created_at: "16-16-2021") ] //[RepoDetails]()
+    var reposArray = [RepoDetails]()
     var filteredData = [RepoDetails]()
     var isFiltering: Bool {
         return searchController.isActive && searchController.searchBar.text?.count ?? 2 > 1
     }
     
     var activityIndicator: UIActivityIndicatorView!
+    var presenter: ReposPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,8 @@ class ReposViewController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         
         //get repos
-//        ReposPresenter(reposViewProtocol: self).getRepos()
+        presenter = ReposPresenter(delegate: self)
+        presenter?.getRepos()
     }
 }
 
@@ -73,6 +75,10 @@ extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.bounds.height / 10	
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.onItemClick(row: indexPath.row)
     }
 }
 
@@ -112,5 +118,10 @@ extension ReposViewController: ReposViewProtocol {
         let okAction  = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in /*any action needed*/}
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func performActionWhenItemClick(row: Int) {
+        print("repo clicked")
+        //if filtered or not
     }
 }

@@ -8,14 +8,16 @@
 
 import Foundation
 
-protocol ReposViewProtocol: BaseViewProtocol {
+protocol ReposViewProtocol: class, BaseViewProtocol {
     func renderHomeWithRepos(repos: [RepoDetails])
+    func performActionWhenItemClick(row: Int)
 }
 
 protocol ReposPresenterProtocol {
     func getRepos()
-    func onSuccess(repos: [Repo])
+    func onSuccess(repos: [RepoDetails])
     func onFail(errorMessage: String)
+    func onItemClick(row: Int)
 }
 
 protocol ReposManagerProtocol {
