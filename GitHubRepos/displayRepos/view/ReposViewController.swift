@@ -13,14 +13,15 @@ class ReposViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
     var searchController: UISearchController!
     
-    var reposArray = ["1", "356", "3", "2035698", "7705356"]
-    var filteredData = [String]()
+    var reposArray = [RepoDetails(name: "shopme", owner: Owner(login: "amr", avatar_url: "aa", avatar_data: Data()), created_at: "12-5-2021"), RepoDetails(name: "sportify", owner: Owner(login: "ahmd", avatar_url: "aa", avatar_data: Data()), created_at: "16-16-2021") ] //[RepoDetails]()
+    var filteredData = [RepoDetails]()
     var isFiltering: Bool {
         return searchController.isActive && searchController.searchBar.text?.count ?? 2 > 1
     }
+    
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,10 @@ class ReposViewController: UIViewController {
         definesPresentationContext = true
         navigationItem.titleView = searchController.searchBar
         searchController.hidesNavigationBarDuringPresentation = false
+        
+        //get repos
+//        ReposPresenter(reposViewProtocol: self).getRepos()
     }
-
-
 }
 
 extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
@@ -54,16 +56,17 @@ extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reposCellId, for: indexPath) as! ReposTableViewCell
         
-        let repo: String
+        let repo: RepoDetails
         if isFiltering {
             repo = filteredData[indexPath.row]
         } else {
-          repo = reposArray[indexPath.row]
+            repo = reposArray[indexPath.row]
         }
 
-        cell.repoNameLabel.text = repo
-        cell.ownerNameLabel.text = repo
-        cell.creationDateLabel.text = repo
+        cell.repoNameLabel.text = repo.name
+        cell.ownerNameLabel.text = repo.owner.login
+        cell.creationDateLabel.text = repo.created_at
+        cell.avatarImageView.image = UIImage(data: repo.owner.avatar_data)
         
         return cell
     }
@@ -77,11 +80,37 @@ extension ReposViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
             if searchText.count > 1 {
-                filteredData = reposArray.filter({(dataString: String) -> Bool in
-                    return dataString.lowercased().contains(searchText.lowercased())
+                filteredData = reposArray.filter({ (repo) -> Bool in
+                    return repo.name.lowercased().contains(searchText.lowercased())
                 })
             }
             tableView.reloadData()
         }
+    }
+}
+
+extension ReposViewController: ReposViewProtocol {
+    func renderHomeWithRepos(repos: [RepoDetails]) {
+        reposArray = repos
+        tableView.reloadData()
+    }
+    
+    func showLoading() {
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.center = self.tableView.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        activityIndicator.stopAnimating()
+    }
+    
+    func showErrorMessage(errorMessage: String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        let okAction  = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in /*any action needed*/}
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }

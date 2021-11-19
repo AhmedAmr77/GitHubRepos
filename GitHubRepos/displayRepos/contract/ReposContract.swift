@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ReposViewProtocol: BaseViewProtocol {
-    func renderHomeWithRepos(repos: [Repo])
+    func renderHomeWithRepos(repos: [RepoDetails])
 }
 
 protocol ReposPresenterProtocol {

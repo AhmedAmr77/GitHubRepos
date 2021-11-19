@@ -11,4 +11,6 @@ import Foundation
 struct Owner {
     let login: String //ownerName
     let avatar_url: String
+    
+    let avatar_data: Data
 }

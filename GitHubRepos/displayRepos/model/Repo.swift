@@ -9,7 +9,7 @@
 import Foundation
 
 struct Repo {
-    let name: String
-    let owner: Owner
+//    let name: String
+//    let owner: Owner
     let url: String
 }
