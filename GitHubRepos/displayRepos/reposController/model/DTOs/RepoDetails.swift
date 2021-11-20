@@ -12,4 +12,5 @@ struct RepoDetails: Decodable {
     let name: String
     var owner: Owner
     let created_at: String
+    let description: String?
 }
