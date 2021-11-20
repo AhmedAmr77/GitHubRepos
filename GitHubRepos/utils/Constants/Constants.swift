@@ -10,4 +10,8 @@ import Foundation
 
 struct Constants {
     static let reposCellId = "ReposTableViewCell"
+
+    static let reposURL = "https://api.github.com/repositories"
+    
+    static let placeholderImage = "placeholder"
 }

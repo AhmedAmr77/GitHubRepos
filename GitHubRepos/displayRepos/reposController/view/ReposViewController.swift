@@ -57,18 +57,14 @@ extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reposCellId, for: indexPath) as! ReposTableViewCell
-        
         let repo: RepoDetails
+        
         if isFiltering {
             repo = filteredData[indexPath.row]
         } else {
             repo = reposArray[indexPath.row]
         }
-
-        cell.repoNameLabel.text = repo.name
-        cell.ownerNameLabel.text = repo.owner.login
-        cell.creationDateLabel.text = repo.created_at
-//        cell.avatarImageView.image = repo.owner.avatar_Image
+        cell.updateUI(repo: repo)
         
         return cell
     }
@@ -79,6 +75,14 @@ extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.onItemClick(row: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as? ReposTableViewCell
+        cell?.loadImage()
+        if indexPath.row + 1 == reposArray.count {
+            presenter?.getRepoDetails()
+        }
     }
 }
 
@@ -97,7 +101,7 @@ extension ReposViewController: UISearchResultsUpdating {
 
 extension ReposViewController: ReposViewProtocol {
     func renderHomeWithRepos(repos: [RepoDetails]) {
-        reposArray = repos
+        reposArray += repos
         tableView.reloadData()
     }
     
@@ -115,7 +119,7 @@ extension ReposViewController: ReposViewProtocol {
     
     func showErrorMessage(errorMessage: String) {
         let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-        let okAction  = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in /*any action needed*/}
+        let okAction  = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }

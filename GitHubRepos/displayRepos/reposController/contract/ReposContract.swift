@@ -15,13 +15,14 @@ protocol ReposViewProtocol: class, BaseViewProtocol {
 
 protocol ReposPresenterProtocol {
     func getRepos()
+    func getRepoDetails()
     func onSuccess(repos: [RepoDetails])
     func onFail(errorMessage: String)
     func onItemClick(row: Int)
+    var reposArray: [Repo] {get}
 }
 
 protocol ReposNetworkManagerProtocol {
     func getReposData(url: String, completion: @escaping ([Repo]?, Error?) -> Void)
-    func getReposDetailsData(url: String, completion: @escaping (RepoDetails?, Error?) -> Void) 
+    func getReposDetailsData(url: String, completion: @escaping (RepoDetails?, Error?) -> Void)
 }
-

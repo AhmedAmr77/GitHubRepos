@@ -15,10 +15,14 @@ class ReposTableViewCell: UITableViewCell {
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
     
+    var presenter: RepoCellPresenterProtocol?
+    var repo: RepoDetails?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
+        presenter = CellPresenter(delegate: self)
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
         avatarImageView.backgroundColor = .red
     }
@@ -29,4 +33,24 @@ class ReposTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
+}
+extension ReposTableViewCell: RepoCellProtocol {
+    func updateUI(repo: RepoDetails) {
+        self.repo = repo
+        repoNameLabel.text = repo.name
+        ownerNameLabel.text = repo.owner.login
+        creationDateLabel.text = repo.created_at
+    }
+    
+    func loadImage() {
+        if let repo = repo {
+            presenter?.getImage(url: repo.owner.avatar_url)
+        }
+    }
+    
+    func showImage(image: UIImage) {
+        avatarImageView.image = image
+    }
 }
