@@ -45,7 +45,7 @@ class ReposPresenter: ReposPresenterProtocol {
             
             let downloadGroup = DispatchGroup()
             
-            for repo in reposArray[reposDetailsCounter ..< min(reposDetailsCounter+10, self.reposArray.count)]{
+            for repo in reposArray[reposDetailsCounter ..< min(reposDetailsCounter+20, self.reposArray.count)]{
                 print("For counter=>", reposDetailsCounter)
                 downloadGroup.enter()
                 networkManager?.getReposDetailsData(url: repo.url, completion: { (repoDetails, err) in

@@ -44,10 +44,12 @@ class ReposViewController: UIViewController {
         //get repos
         presenter = ReposPresenter(delegate: self)
         presenter?.getRepos()
+        
+        tableView.prefetchDataSource = self
     }
 }
 
-extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
+extension ReposViewController: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredData.count
@@ -80,7 +82,10 @@ extension ReposViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = cell as? ReposTableViewCell
         cell?.loadImage()
-        if indexPath.row + 1 == reposArray.count {
+    }
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        if indexPaths.last?.row ?? 0 >= (reposArray.count - 3) {
             presenter?.getRepoDetails()
         }
     }
