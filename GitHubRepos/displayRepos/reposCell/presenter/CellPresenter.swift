@@ -22,10 +22,8 @@ class CellPresenter: RepoCellPresenterProtocol {
     
     func getImage(url: String) {
         if let image = imagesCache.object(forKey: url as AnyObject) as? UIImage {
-            print("getImage cache")
             self.delegate?.showImage(image: image)
         } else {
-            print("getImage call")
             networkManager?.getOwnerAvatar(url: url, completion: { (data, err) in
                 if let data = data {
                     if let image = UIImage(data: data){

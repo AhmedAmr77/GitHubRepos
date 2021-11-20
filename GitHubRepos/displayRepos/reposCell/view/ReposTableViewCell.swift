@@ -24,7 +24,7 @@ class ReposTableViewCell: UITableViewCell {
         
         presenter = CellPresenter(delegate: self)
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
-        avatarImageView.backgroundColor = .red
+        avatarImageView.backgroundColor = .lightGray
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

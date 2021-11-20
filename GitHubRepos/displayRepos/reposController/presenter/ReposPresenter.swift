@@ -45,8 +45,7 @@ class ReposPresenter: ReposPresenterProtocol {
             
             let downloadGroup = DispatchGroup()
             
-            for repo in reposArray[reposDetailsCounter ..< min(reposDetailsCounter+20, self.reposArray.count)]{
-                print("For counter=>", reposDetailsCounter)
+            for repo in reposArray[reposDetailsCounter ..< min(reposDetailsCounter+15, self.reposArray.count)]{
                 downloadGroup.enter()
                 networkManager?.getReposDetailsData(url: repo.url, completion: { (repoDetails, err) in
                     if let repoDetails = repoDetails {
@@ -58,7 +57,6 @@ class ReposPresenter: ReposPresenterProtocol {
             }
             
             downloadGroup.notify(queue: DispatchQueue.main) {
-                print("downloadGroup notify")
                 self.isFetchInProgress = false
                 self.onSuccess(repos: self.reposDetailsArray)
                 self.reposDetailsArray.removeAll()
