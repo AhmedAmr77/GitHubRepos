@@ -14,4 +14,6 @@ struct Constants {
     static let reposURL = "https://api.github.com/repositories"
     
     static let placeholderImage = "placeholder"
+    
+    static let repoDetailsVC = "RepoDetailsViewController"
 }
