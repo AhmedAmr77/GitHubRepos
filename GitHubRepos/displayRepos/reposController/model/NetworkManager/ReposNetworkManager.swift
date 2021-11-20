@@ -41,7 +41,7 @@ class ReposNetworkManager: ReposNetworkManagerProtocol {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        completion(nil, NSError(domain: "status code error", code: 10, userInfo: nil) )
+                        completion(nil, NSError(domain: "Status code", code: (response as? HTTPURLResponse)?.statusCode ?? 00, userInfo: nil) )
                     }
                 }
             }
@@ -74,7 +74,7 @@ class ReposNetworkManager: ReposNetworkManagerProtocol {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        completion(nil, NSError(domain: "status code error", code: 10, userInfo: nil) )
+                        completion(nil, NSError(domain: "Status code", code: (response as? HTTPURLResponse)?.statusCode ?? 00, userInfo: nil) )
                     }
                 }
             }

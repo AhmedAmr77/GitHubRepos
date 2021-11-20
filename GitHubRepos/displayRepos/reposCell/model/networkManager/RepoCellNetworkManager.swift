@@ -16,7 +16,6 @@ class RepoCellNetworkManager: RepoCellNetworkManagerProtocol {
     func getOwnerAvatar(url: String, completion: @escaping (Data?, Error?) -> Void) {
         if let url = URL(string: url) {
             dataTask = defaultSession.dataTask(with: url) { data, response, error in
-                print("Network > Cell > Avatar >", url)
                 if let error = error {
                     DispatchQueue.main.async {
                         completion(nil, error)
@@ -31,7 +30,7 @@ class RepoCellNetworkManager: RepoCellNetworkManagerProtocol {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        completion(nil, NSError(domain: "status code error", code: 10, userInfo: nil) )
+                        completion(nil, NSError(domain: "Status code", code: (response as? HTTPURLResponse)?.statusCode ?? 00, userInfo: nil) )
                     }
                 }
             }

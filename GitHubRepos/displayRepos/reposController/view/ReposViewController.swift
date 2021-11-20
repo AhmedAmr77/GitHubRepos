@@ -130,10 +130,12 @@ extension ReposViewController: ReposViewProtocol {
     }
     
     func performActionWhenItemClick(row: Int) {
-        print("repo clicked")
-        //if filtered or not
         let vc = self.storyboard?.instantiateViewController(identifier: Constants.repoDetailsVC) as! RepoDetailsViewController
-        vc.repoDetails = reposArray[row]
+        if isFiltering {
+            vc.repoDetails = filteredData[row]
+        } else {
+            vc.repoDetails = reposArray[row]
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
