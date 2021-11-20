@@ -116,6 +116,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cVy-lI-XHB"/>
                     </view>
+                    <connections>
+                        <outlet property="creationDateLabel" destination="7Su-50-LPk" id="zKZ-sA-UQC"/>
+                        <outlet property="descreptionLabel" destination="cif-8a-aWq" id="tdG-2D-slf"/>
+                        <outlet property="ownerNameLabel" destination="xeF-g9-Oda" id="pPV-nn-VjO"/>
+                        <outlet property="repoNameLabel" destination="4x1-uj-gnn" id="IeR-6L-Dv7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLV-Oi-yyN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

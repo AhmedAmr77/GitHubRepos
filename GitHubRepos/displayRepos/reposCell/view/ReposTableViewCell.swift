@@ -41,7 +41,7 @@ extension ReposTableViewCell: RepoCellProtocol {
         self.repo = repo
         repoNameLabel.text = repo.name
         ownerNameLabel.text = repo.owner.login
-        creationDateLabel.text = repo.created_at
+        creationDateLabel.text = String(repo.created_at.prefix(10))
     }
     
     func loadImage() {
