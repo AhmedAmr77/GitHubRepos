@@ -13,7 +13,7 @@ class NetworkService {
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
     
-    func getData(url: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func getData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
         if let url = URL(string: url) {
             dataTask = defaultSession.dataTask(with: url) { data, response, error in
                 
